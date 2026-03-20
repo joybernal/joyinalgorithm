@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Box from '@mui/joy/Box'
 import Typography from '@mui/joy/Typography'
 import Tabs from '@mui/joy/Tabs'
@@ -13,8 +13,7 @@ import Chip from '@mui/joy/Chip'
 import AspectRatio from '@mui/joy/AspectRatio'
 import Grid from '@mui/joy/Grid'
 import LaunchIcon from '@mui/icons-material/Launch'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import { getProjectDetailPath } from '@/lib/paths'
+import { getProjectDetailPath, getUiProjectPath } from '@/lib/paths'
 
 interface Project {
   id: string
@@ -24,6 +23,8 @@ interface Project {
   tags: string[]
   github?: string
   live?: string
+  ui?: string
+  projectFolder?: string
 }
 
 interface Category {
@@ -35,25 +36,32 @@ interface Category {
 const categories: Category[] = [
   {
     key: 'frontend',
-    label: 'Frontend Projects',
+    label: 'UI Frontend Projects',
     projects: [
       {
-        id: 'frontend-1',
-        title: 'E-Commerce Dashboard',
-        description: 'A modern dashboard for managing online store products and orders.',
-        image: '/placeholder.jpg',
-        tags: ['React', 'TypeScript', 'Joy UI'],
-        github: '#',
-        live: '#',
+        id: 'facebook',
+        title: 'Facebook Clone UI',
+        description: 'A simple Facebook-style UI built from HTML/CSS/JS templates.',
+        image: '/facebook_preview.jpg',
+        tags: ['HTML', 'CSS', 'JavaScript'],
+        ui: 'facebook',
       },
       {
-        id: 'frontend-2',
-        title: 'Portfolio Template',
-        description: 'A customizable portfolio template for developers.',
+        id: 'instagram',
+        title: 'Instagram Clone UI',
+        description: 'An Instagram-style UI built from HTML/CSS/JS templates.',
         image: '/placeholder.jpg',
-        tags: ['React', 'CSS', 'Animations'],
-        github: '#',
+        tags: ['HTML', 'CSS', 'JavaScript'],
+        ui: 'instagram',
       },
+      {
+        id: 'x',
+        title: 'X Clone UI',
+        description: 'An X/Twitter-style UI built from HTML/CSS/JS templates.',
+        image: '/placeholder.jpg',
+        tags: ['HTML', 'CSS', 'JavaScript'],
+        ui: 'x',
+      }
     ],
   },
   {
@@ -195,80 +203,89 @@ const categories: Category[] = [
 ]
 
 function ProjectCard({ project }: { project: Project }) {
+  const targetPath = project.ui ? getUiProjectPath(project.ui) : getProjectDetailPath(project.id)
+  const navigate = useNavigate()
+
   return (
-    <Link to={getProjectDetailPath(project.id)} style={{ textDecoration: 'none' }}>
-      <Card
-        variant="outlined"
-        sx={{
-          height: '100%',
-          bgcolor: 'background.surface',
-          borderColor: 'neutral.800',
-          cursor: 'pointer',
-          transition: 'all 0.3s ease',
-          '&:hover': {
-            borderColor: 'primary.600',
-            transform: 'translateY(-4px)',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-          },
-        }}
-      >
-        <CardOverflow>
-          <AspectRatio ratio="16/9">
-            <img
-              src={project.image}
-              alt={project.title}
-              style={{ objectFit: 'cover' }}
-            />
-          </AspectRatio>
-        </CardOverflow>
-        <CardContent sx={{ p: 2 }}>
-          <Typography level="title-md" sx={{ fontWeight: 600, mb: 1 }}>
-            {project.title}
-          </Typography>
-          <Typography level="body-sm" sx={{ color: 'text.tertiary', mb: 2 }}>
-            {project.description}
-          </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 2 }}>
-            {project.tags.map((tag) => (
-              <Chip
-                key={tag}
-                size="sm"
-                variant="soft"
-                sx={{
-                  bgcolor: 'rgba(0, 212, 255, 0.1)',
-                  color: 'primary.400',
-                  fontSize: '0.7rem',
-                }}
-              >
-                {tag}
-              </Chip>
-            ))}
-          </Box>
-          <Box sx={{ display: 'flex', gap: 1 }}>
-            {project.github && (
-              <Chip
-                size="sm"
-                variant="outlined"
-                startDecorator={<GitHubIcon sx={{ fontSize: 14 }} />}
-                sx={{ borderColor: 'neutral.700', color: 'text.secondary' }}
-              >
-                Code
-              </Chip>
-            )}
-            {project.live && (
-              <Chip
-                size="sm"
-                variant="outlined"
-                startDecorator={<LaunchIcon sx={{ fontSize: 14 }} />}
-                sx={{ borderColor: 'neutral.700', color: 'text.secondary' }}
-              >
-                Live
-              </Chip>
-            )}
-          </Box>
-        </CardContent>
-      </Card>
-    </Link>
+    <Card
+      role="button"
+      tabIndex={0}
+      onClick={() => navigate(targetPath)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') navigate(targetPath)
+      }}
+      variant="outlined"
+      sx={{
+        height: '100%',
+        bgcolor: 'background.surface',
+        borderColor: 'neutral.800',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          borderColor: 'primary.600',
+          transform: 'translateY(-4px)',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+        },
+      }}
+    >
+      <CardOverflow>
+        <AspectRatio ratio="16/9">
+          <img src={project.image} alt={project.title} style={{ objectFit: 'cover' }} />
+        </AspectRatio>
+      </CardOverflow>
+      <CardContent sx={{ p: 2 }}>
+        <Typography level="title-md" sx={{ fontWeight: 600, mb: 1 }}>
+          {project.title}
+        </Typography>
+        <Typography level="body-sm" sx={{ color: 'text.tertiary', mb: 2 }}>
+          {project.description}
+        </Typography>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 2 }}>
+          {project.tags.map((tag) => (
+            <Chip
+              key={tag}
+              size="sm"
+              variant="soft"
+              sx={{
+                bgcolor: 'rgba(0, 212, 255, 0.1)',
+                color: 'primary.400',
+                fontSize: '0.7rem',
+              }}
+            >
+              {tag}
+            </Chip>
+          ))}
+        </Box>
+        <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
+          <Chip
+            size="sm"
+            variant="solid"
+            sx={{
+              bgcolor: 'primary.600',
+              color: 'white',
+              '&:hover': { bgcolor: 'primary.700' },
+            }}
+          >
+            {project.ui ? 'View UI' : 'View Details'}
+          </Chip>
+          <a
+            href={project.live ? project.live : targetPath}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: 'none' }}
+          >
+            <Chip
+              size="sm"
+              variant="outlined"
+              startDecorator={<LaunchIcon sx={{ fontSize: 14 }} />}
+              sx={{ borderColor: 'neutral.700', color: 'text.secondary' }}
+            >
+              Open in New Tab
+            </Chip>
+          </a>
+        </Box>
+      </CardContent>
+    </Card>
   )
 }
 

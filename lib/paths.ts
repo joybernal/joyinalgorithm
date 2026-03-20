@@ -2,6 +2,7 @@ export const PATHS = {
   HOME: '/',
   PROJECTS: '/projects',
   PROJECT_DETAIL: '/projects/:id',
+  UI_PROJECT: '/ui/:project',
   RESUME: '/resume',
   TECH_STACK: '/tech-stack',
   CERTIFICATIONS: '/certifications',
@@ -31,3 +32,5 @@ export type HRPathKey = keyof typeof HR_PATHS;
 
 // Helper function to generate project detail paths
 export const getProjectDetailPath = (id: string) => `/projects/${id}`;
+
+export const getUiProjectPath = (project: string) => `/ui/${project}`;
