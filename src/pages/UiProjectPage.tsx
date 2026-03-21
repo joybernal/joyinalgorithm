@@ -18,7 +18,10 @@ import xHtml from './frontend-projects/templates/x.html?raw'
 import xCss from './frontend-projects/css/x.css?raw'
 import xJs from './frontend-projects/js/x.js?raw'
 
-type UiProjectKey = 'facebook' | 'instagram' | 'x'
+import linkedinHtml from './frontend-projects/templates/linkedin.html?raw'
+import linkedinCss from './frontend-projects/css/linkedin.css?raw'
+
+type UiProjectKey = 'facebook' | 'instagram' | 'x' | 'linkedin'
 
 const PROJECTS: Record<
   UiProjectKey,
@@ -46,6 +49,12 @@ const PROJECTS: Record<
     html: xHtml,
     css: xCss,
     js: xJs,
+  },
+  linkedin: {
+    title: 'Linkedin UI',
+    html: linkedinHtml,
+    css: linkedinCss,
+    js: '',
   },
 }
 
