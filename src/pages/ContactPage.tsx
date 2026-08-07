@@ -30,16 +30,16 @@ const socialLinks: SocialLink[] = [
   {
     name: 'GitHub',
     icon: <GitHubIcon sx={{ fontSize: 32 }} />,
-    url: 'https://github.com/joybernal',
+    url: 'https://github.com/joyinalgorithms',
     color: '#ffffff',
-    username: '@joybernal',
+    username: '@joyinalgorithms',
   },
   {
     name: 'LinkedIn',
     icon: <LinkedInIcon sx={{ fontSize: 32 }} />,
     url: 'https://www.linkedin.com/in/joy-bernal-390297369/',
     color: '#0a66c2',
-    username: 'Christine Joy Bernal',
+    username: 'Joy Bernal',
   },
   {
     name: 'Discord',
@@ -69,9 +69,9 @@ const socialLinks: SocialLink[] = [
   {
     name: 'Facebook',
     icon: <FacebookIcon sx={{ fontSize: 32 }} />,
-    url: 'https://www.facebook.com/christinejoybernal17',
+    url: 'https://www.facebook.com/joyinalgorithm/',
     color: '#1877f2',
-    username: 'Christine Joy Bernal',
+    username: 'Joy Bernal',
   },
 ]
 

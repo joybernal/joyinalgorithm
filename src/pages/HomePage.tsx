@@ -322,20 +322,9 @@ export default function HomePage() {
                   lineHeight: 1.1,
                 }}
               >
-                Explore my work by the way you want to know me.
+                Explore my works
               </Typography>
             </Box>
-            <Typography
-              level="body-lg"
-              sx={{
-                color: 'text.tertiary',
-                maxWidth: '380px',
-                lineHeight: 1.7,
-                alignSelf: { md: 'flex-end' },
-              }}
-            >
-              Jump into finished builds, scan the tools behind them, or check the credentials that shaped the work.
-            </Typography>
           </Box>
 
           <Grid container spacing={3} sx={{ alignItems: 'stretch' }}>
