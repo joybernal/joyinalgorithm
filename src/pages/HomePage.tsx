@@ -132,6 +132,7 @@ export default function HomePage() {
                 lineHeight: 1.7,
               }}
             >
+              BS Computer Science Graduate<br />
               I build scalable, modern web applications with clean code and intuitive design. Passionate about turning ideas into impactful digital solutions.
               <br /><br />
               🏆 Finalist & Special Citation Awardee — Project LIF, recognized by National Academy of Science and Technology (NAST).

@@ -45,7 +45,7 @@ export default function Footer() {
 
         <Box sx={{ display: 'flex', gap: 2 }}>
           <Link
-            href="https://github.com/joybernal"
+            href="https://github.com/joyinalgorithms"
             target="_blank"
             rel="noopener noreferrer"
             sx={{
