@@ -10,6 +10,21 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 import WorkIcon from '@mui/icons-material/Work'
 import SchoolIcon from '@mui/icons-material/School'
 
+const education = [
+  {
+    degree: 'Bachelor of Science in Computer Science',
+    school: 'President Ramon Magsaysay State University - Main Campus',
+    period: '2026',
+    details: 'Completed a computer science degree with academic honors, technical awards, and student service recognition.',
+    honors: [
+      'Academic Distinction',
+      'Best Thesis',
+      'Best in Computer Networking',
+      'Service Awardee',
+    ],
+  },
+]
+
 const workExperience = [
   {
     title: 'On-the-Job Training (OJT) – Junior Web Developer',
@@ -207,6 +222,114 @@ export default function ResumePage() {
         </Box>
 
         <Grid container spacing={4}>
+          {/* Education */}
+          <Grid xs={12}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
+              <Box
+                sx={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: '12px',
+                  bgcolor: 'rgba(0, 255, 136, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <SchoolIcon sx={{ color: 'success.500', fontSize: 24 }} />
+              </Box>
+              <Typography level="h2" sx={{ fontWeight: 700 }}>
+                Education
+              </Typography>
+            </Box>
+            <Box sx={{ position: 'relative', pl: 4 }}>
+              <Box
+                sx={{
+                  position: 'absolute',
+                  left: 6,
+                  top: 0,
+                  bottom: 0,
+                  width: 2,
+                  bgcolor: 'neutral.800',
+                }}
+              />
+              {education.map((item, index) => (
+                <Box key={index} sx={{ position: 'relative', mb: 4 }}>
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      left: -28,
+                      top: 24,
+                      width: 12,
+                      height: 12,
+                      borderRadius: '50%',
+                      bgcolor: 'success.500',
+                      border: '2px solid',
+                      borderColor: 'background.body',
+                    }}
+                  />
+                  <Card
+                    variant="outlined"
+                    sx={{
+                      borderColor: 'neutral.800',
+                      bgcolor: 'background.surface',
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        borderColor: 'success.700',
+                        transform: 'translateX(4px)',
+                      },
+                    }}
+                  >
+                    <CardContent>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 1, mb: 1 }}>
+                        <Typography level="title-lg" sx={{ fontWeight: 600 }}>
+                          {item.degree}
+                        </Typography>
+                        <Typography
+                          level="body-sm"
+                          sx={{
+                            color: 'success.400',
+                            fontFamily: 'code',
+                          }}
+                        >
+                          {item.period}
+                        </Typography>
+                      </Box>
+                      <Typography level="body-md" sx={{ color: 'text.secondary', mb: 2 }}>
+                        {item.school}
+                      </Typography>
+                      <Typography level="body-sm" sx={{ color: 'text.tertiary', mb: 2 }}>
+                        {item.details}
+                      </Typography>
+                      <Divider sx={{ my: 2 }} />
+                      <Grid container spacing={1.5}>
+                        {item.honors.map((honor) => (
+                          <Grid key={honor} xs={12} sm={6}>
+                            <Box
+                              sx={{
+                                border: '1px solid',
+                                borderColor: 'rgba(0, 255, 136, 0.22)',
+                                bgcolor: 'rgba(0, 255, 136, 0.07)',
+                                borderRadius: '10px',
+                                px: 1.5,
+                                py: 1.25,
+                                color: 'text.secondary',
+                                fontSize: '0.875rem',
+                                fontWeight: 600,
+                              }}
+                            >
+                              {honor}
+                            </Box>
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </CardContent>
+                  </Card>
+                </Box>
+              ))}
+            </Box>
+          </Grid>
+
           {/* Work Experience */}
           <Grid xs={12}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>

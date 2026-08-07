@@ -7,54 +7,65 @@ import CardContent from '@mui/joy/CardContent'
 import Avatar from '@mui/joy/Avatar'
 import Grid from '@mui/joy/Grid'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import FolderIcon from '@mui/icons-material/Folder'
-import DescriptionIcon from '@mui/icons-material/Description'
-import CodeIcon from '@mui/icons-material/Code'
-import VerifiedIcon from '@mui/icons-material/Verified'
-import EmailIcon from '@mui/icons-material/Email'
 import { PATHS } from '@/routes/paths'
 import { FaFolderOpen } from 'react-icons/fa'
 import { FaFileLines } from 'react-icons/fa6'
 import { IoLayersSharp } from 'react-icons/io5'
 import { MdVerifiedUser } from 'react-icons/md'
 import { HiPaperAirplane } from 'react-icons/hi2'
+import { BiSolidComponent } from 'react-icons/bi'
 
 
 const sectionPreviews = [
   {
     title: 'Projects',
-    description: 'Explore my portfolio of web applications, ML projects, and games.',
+    eyebrow: 'Builds',
+    description: 'Full-stack apps, frontend recreations, CS50 builds, and ML experiments.',
     icon: <FaFolderOpen size={32} />,
     path: PATHS.PROJECTS,
     color: '#00d4ff',
+    stat: '40+',
+    statLabel: 'project entries',
   },
   {
     title: 'Resume',
-    description: 'View or download my professional resume and work experience.',
+    eyebrow: 'Profile',
+    description: 'A quick pass through my education, experience, and developer strengths.',
     icon: <FaFileLines size={32} />,
     path: PATHS.RESUME,
     color: '#00ff88',
+    stat: 'CS',
+    statLabel: 'graduate',
   },
   {
     title: 'Tech Stack',
-    description: 'Technologies and tools I use for development.',
+    eyebrow: 'Tools',
+    description: 'The languages, frameworks, and tools I use to ship practical software.',
     icon: <IoLayersSharp size={32} />,
     path: PATHS.TECH_STACK,
     color: '#ff6b6b',
+    stat: 'React',
+    statLabel: 'plus backend',
   },
   {
     title: 'Certifications',
-    description: 'Professional certifications and achievements.',
+    eyebrow: 'Proof',
+    description: 'Certificates and milestones from CS50, cybersecurity, data, and more.',
     icon: <MdVerifiedUser size={32} />,
     path: PATHS.CERTIFICATIONS,
     color: '#ffd93d',
+    stat: 'NAST',
+    statLabel: 'recognized work',
   },
   {
     title: 'Contact Me',
-    description: 'Get in touch for collaborations or opportunities.',
+    eyebrow: 'Connect',
+    description: 'Reach out for roles, collaborations, or projects worth building well.',
     icon: <HiPaperAirplane size={32} />,
     path: PATHS.CONTACT,
     color: '#c084fc',
+    stat: 'Open',
+    statLabel: 'to opportunities',
   },
 ]
 
@@ -267,94 +278,143 @@ export default function HomePage() {
       {/* Section Previews */}
       <Box
         sx={{
-          py: { xs: 6, md: 10 },
+          py: { xs: 7, md: 11 },
           px: { xs: 2, md: 4 },
           bgcolor: 'background.level1',
+          position: 'relative',
+          overflow: 'hidden',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            background:
+              'linear-gradient(135deg, rgba(0, 212, 255, 0.08), transparent 34%), linear-gradient(315deg, rgba(0, 255, 136, 0.08), transparent 38%)',
+            pointerEvents: 'none',
+          },
         }}
       >
-        <Box sx={{ maxWidth: '1200px', mx: 'auto' }}>
-          <Typography
-            level="h2"
+        <Box sx={{ maxWidth: '1200px', mx: 'auto', position: 'relative' }}>
+          <Box
             sx={{
-              textAlign: 'center',
-              mb: 2,
-              fontWeight: 700,
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              justifyContent: 'space-between',
+              gap: 3,
+              mb: 5,
             }}
           >
-            Explore My Work
-          </Typography>
-          <Typography
-            level="body-lg"
-            sx={{
-              textAlign: 'center',
-              color: 'text.tertiary',
-              mb: 6,
-              maxWidth: '600px',
-              mx: 'auto',
-            }}
-          >
-            Navigate through different sections to learn more about my skills, 
-            experience, and projects.
-          </Typography>
+            <Box sx={{ maxWidth: '640px' }}>
+              <Typography
+                level="body-sm"
+                sx={{
+                  color: 'primary.500',
+                  fontFamily: 'code',
+                  mb: 1.5,
+                  letterSpacing: '0.08em',
+                }}
+              >
+              </Typography>
+              <Typography
+                level="h2"
+                sx={{
+                  fontWeight: 800,
+                  fontSize: { xs: '2rem', md: '2.8rem' },
+                  lineHeight: 1.1,
+                }}
+              >
+                Explore my work by the way you want to know me.
+              </Typography>
+            </Box>
+            <Typography
+              level="body-lg"
+              sx={{
+                color: 'text.tertiary',
+                maxWidth: '380px',
+                lineHeight: 1.7,
+                alignSelf: { md: 'flex-end' },
+              }}
+            >
+              Jump into finished builds, scan the tools behind them, or check the credentials that shaped the work.
+            </Typography>
+          </Box>
 
-          <Grid container spacing={3}>
-            {sectionPreviews.map((section, index) => (
-              <Grid key={section.title} xs={12} sm={6} md={4}>
-                <Link to={section.path} style={{ textDecoration: 'none' }}>
-                  <Card
-                    variant="outlined"
-                    sx={{
-                      height: '100%',
-                      bgcolor: 'background.surface',
-                      borderColor: 'neutral.800',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      '&:hover': {
-                        borderColor: section.color,
-                        transform: 'translateY(-8px)',
-                        boxShadow: `0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px ${section.color}20`,
-                      },
-                    }}
-                    className="animate-fadeInUp"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <CardContent sx={{ p: 3 }}>
-                      <Box
+          <Grid container spacing={3} sx={{ alignItems: 'stretch' }}>
+            <Grid xs={12}>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: '1fr',
+                    sm: 'repeat(2, minmax(0, 1fr))',
+                    lg: 'repeat(5, minmax(0, 1fr))',
+                  },
+                  gap: 2,
+                }}
+              >
+                {sectionPreviews.map((section, index) => (
+                  <Box key={section.title}>
+                    <Link to={section.path} style={{ textDecoration: 'none' }}>
+                      <Card
+                        variant="outlined"
                         sx={{
-                          width: 60,
-                          height: 60,
-                          borderRadius: '12px',
-                          bgcolor: `${section.color}15`,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: section.color,
-                          mb: 2,
+                          height: '100%',
+                          minHeight: 178,
+                          bgcolor: 'rgba(18, 24, 30, 0.78)',
+                          borderColor: 'neutral.800',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            borderColor: section.color,
+                            transform: 'translateY(-6px)',
+                            boxShadow: `0 18px 36px rgba(0, 0, 0, 0.28), 0 0 20px ${section.color}24`,
+                          },
                         }}
+                        className="animate-fadeInUp"
+                        style={{ animationDelay: `${index * 0.08}s` }}
                       >
-                        {section.icon}
-                      </Box>
-                      <Typography
-                        level="title-lg"
-                        sx={{
-                          fontWeight: 600,
-                          mb: 1,
-                          color: 'text.primary',
-                        }}
-                      >
-                        {section.title}
-                      </Typography>
-                      <Typography
-                        level="body-sm"
-                        sx={{ color: 'text.tertiary' }}
-                      >
-                        {section.description}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </Grid>
-            ))}
+                        <CardContent sx={{ p: 2.5, height: '100%' }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mb: 2 }}>
+                            <Box
+                              sx={{
+                                width: 54,
+                                height: 54,
+                                borderRadius: '14px',
+                                bgcolor: `${section.color}16`,
+                                border: `1px solid ${section.color}26`,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: section.color,
+                                flex: '0 0 auto',
+                              }}
+                            >
+                              {section.icon}
+                            </Box>
+                            <Box sx={{ textAlign: 'right' }}>
+                              <Typography level="title-lg" sx={{ color: section.color, fontWeight: 800 }}>
+                                {section.stat}
+                              </Typography>
+                              <Typography level="body-xs" sx={{ color: 'text.tertiary' }}>
+                                {section.statLabel}
+                              </Typography>
+                            </Box>
+                          </Box>
+                          <Typography level="body-xs" sx={{ color: section.color, fontFamily: 'code', mb: 0.75 }}>
+                            {section.eyebrow}
+                          </Typography>
+                          <Typography level="title-lg" sx={{ fontWeight: 700, mb: 0.75, color: 'text.primary' }}>
+                            {section.title}
+                          </Typography>
+                          <Typography level="body-sm" sx={{ color: 'text.tertiary', lineHeight: 1.55 }}>
+                            {section.description}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </Box>
+                ))}
+              </Box>
+            </Grid>
           </Grid>
         </Box>
       </Box>
